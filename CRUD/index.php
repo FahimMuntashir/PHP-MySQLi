@@ -38,7 +38,7 @@ VALUES('$title', '$des');
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Hello, world!</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
+    <!-- <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css"> -->
     <script type="text/javascript" charset="utf8" src="https://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
 
     <script src="//cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
@@ -105,7 +105,7 @@ VALUES('$title', '$des');
         </form>
     </div>
 
-    <div class="container">
+    <div class="container" mb-5>
         
 
 
@@ -143,6 +143,8 @@ VALUES('$title', '$des');
             </tbody>
         </table>
     </div>
+
+    <hr>
 
     <!-- Optional JavaScript; choose one of the two! -->
 

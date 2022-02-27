@@ -106,7 +106,7 @@ VALUES('$title', '$des');
     </div>
 
     <div class="container" mb-5>
-        
+
 
 
         <table class="table" id="myTable">
@@ -132,11 +132,13 @@ VALUES('$title', '$des');
                     <td>" . $row['title'] . "</td>
                     <td>" . $row["descrp"] . "</td>
                     <td>" . $row['tStamp'] . "</td>
-                    <td>action</td>
+                    <td><button type='button' class='btn btn-dark btn-sm'>Edit</button> <button type='button' class='btn btn-dark btn-sm'>Delete</button> 
+                    </td>
                 </tr>";
                     }
                 }
                 ?>
+
 
 
 

@@ -26,6 +26,20 @@ VALUES('$title', '$des');
 
 ?>
 
+<!-- deleting item -->
+<?php
+
+if (isset($_GET['del'])) {
+    $stid = $_GET['del'];
+
+    $query  = "DELETE  FROM notes WHERE sno ={$stid}";
+    $deleteResult = mysqli_query($conn, $query);
+    if ($deleteResult) {
+        echo "data removed successfully <br>";
+    }
+}
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -125,14 +139,16 @@ VALUES('$title', '$des');
                 $result = mysqli_query($conn, $sql);
 
                 if (mysqli_num_rows($result) > 0) {
+                    $inc = 0;
                     // output data of each row
                     while ($row = mysqli_fetch_assoc($result)) {
                         echo "<tr>
-                    <th scope='row'>" . $row['sno'] . "</th>
+                    <!-- <th scope='row'>" . $row['sno'] . "</th> -->
+                    <th scope='row'>" . $inc = $inc + 1 . "</th>
                     <td>" . $row['title'] . "</td>
                     <td>" . $row["descrp"] . "</td>
                     <td>" . $row['tStamp'] . "</td>
-                    <td><button type='button' class='btn btn-dark btn-sm'>Edit</button> <button type='button' class='btn btn-dark btn-sm'>Delete</button> 
+                    <td><button type='button' class='btn btn-dark btn-sm'>Edit</button> <a href='index.php?del={$row['sno']}' <button type='button' class='btn btn-dark btn-sm'>Delete</button> </a>
                     </td>
                 </tr>";
                     }

@@ -11,7 +11,10 @@ $conn = mysqli_connect($servername, $username, $pass, $db);
 $insert = false;
 // $result = mysqli_query($conn, $sql);
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+// if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if (isset($_POST['addNote'])) {
+
+
     $title = $_POST['title'];
     $des = $_POST['desc'];
     $sql = "INSERT INTO notes (title, descrp)
@@ -40,6 +43,83 @@ if (isset($_GET['del'])) {
 }
 ?>
 
+
+<!-- updating data -->
+
+<?php
+if (isset($_GET['update'])) {
+    $stid = $_GET['update'];
+
+    $updateQuery  = "SELECT * FROM notes WHERE sno ={$stid}";
+
+    $updateResult = mysqli_query($conn, $updateQuery);
+
+    while ($row = mysqli_fetch_assoc($updateResult)) {
+        $ntid = $row['sno'];
+        $ntitle = $row['title'];
+        $ndes = $row['descrp'];
+
+
+?>
+        <form method="post">
+            <label for="fname">Title:</label><br>
+            <input type="text" id="fname" name="fname" value=<?php echo $ntitle; ?>><br>
+            <label for="lname">Description:</label><br>
+            <input type="text" id="lname" name="lname" value=<?php echo $ndes; ?>> <br> <br>
+            <input type="submit" value="Update" name="update_btn">
+
+
+
+        </form>
+
+        <!-- Button trigger modal -->
+        <!-- <button type="button" class="update btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" name="update">
+  Launch demo modal
+</button> -->
+
+        <!-- Modal -->
+        <!-- <div class="modal fade update" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+<?php
+
+    }
+} ?>
+
+
+<?php
+if (isset($_POST['update_btn'])) {
+
+
+    $ntitle = $_POST['fname'];
+    $ndes = $_POST['lname'];
+
+    $query = "UPDATE notes SET title = '$ntitle', descrp = '$ndes' WHERE sno = $ntid";
+    $updateQ = mysqli_query($conn, $query);
+    if ($updateQ) {
+        echo "update successfully";
+    }
+}
+?>
+
+
+
+
 <!doctype html>
 <html lang="en">
 
@@ -60,6 +140,9 @@ if (isset($_GET['del'])) {
 </head>
 
 <body>
+
+
+
 
     <?php
 
@@ -115,7 +198,7 @@ if (isset($_GET['del'])) {
                 <textarea class="form-control" placeholder="" id="desc" name="desc" style="height: 100px"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary my-3">Add Note</button>
+            <button type="submit" class="btn btn-primary my-3" name="addNote">Add Note</button>
         </form>
     </div>
 
@@ -148,7 +231,7 @@ if (isset($_GET['del'])) {
                     <td>" . $row['title'] . "</td>
                     <td>" . $row["descrp"] . "</td>
                     <td>" . $row['tStamp'] . "</td>
-                    <td><button type='button' class='btn btn-dark btn-sm'>Edit</button> <a href='index.php?del={$row['sno']}' <button type='button' class='btn btn-dark btn-sm'>Delete</button> </a>
+                    <td><a href='index.php?update={$row['sno']}' <button type='button'  class='btn btn-dark btn-sm'>Update</button> </a> <a href='index.php?del={$row['sno']}' <button type='button' class='btn btn-dark btn-sm'>Delete</button> </a>
                     </td>
                 </tr>";
                     }
